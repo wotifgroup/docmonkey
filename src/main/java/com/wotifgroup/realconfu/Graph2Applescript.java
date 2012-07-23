@@ -58,36 +58,40 @@ public class Graph2Applescript {
 
     //from http://forums.omnigroup.com/showthread.php?t=106&highlight=export+posix
     public String export_pdf(Graph graph) {
-        String export = "--inspired by (c) 2011, Charles-Axel Dein\n" +
+        String export = "property exportFileExtension : \"pdf\"\n" +
                 "\n" +
-                "property exportFileExtension : \"pdf\"\n" +
-                "-- End of Settings\n" +
-                "\n" +
-                "\tset export_folder to (choose folder with prompt \"Pick the destination folder\") as string\n" +
+                "\t--\ttell canvas of front window\n" +
+                "\tset theDocument to front document\n" +
+                "\tset theWindow to front window\n" +
+                "\t\n" +
+                "\tset export_folder to (POSIX path of \"/Users/Brett/work/tmp\")\n" +
                 "\t\n" +
                 "\tset area type of current export settings to entire document\n" +
                 "\tset draws background of current export settings to false\n" +
                 "\t\n" +
-                "\trepeat with theWindow in windows\n" +
-                "\t\tset theDocument to document of theWindow\n" +
-                "\t\tlog \"In window \" & name of theWindow\n" +
+                "\t--\trepeat with theWindow in windows\n" +
+                "\tset theDocument to document of theWindow\n" +
+                "\tlog \"In window \" & name of theWindow\n" +
+                "\t\n" +
+                "\t-- check if this a true document\n" +
+                "\tset hasDocument to true\n" +
+                "\ttry\n" +
+                "\t\tset theFilename to name of theDocument\n" +
+                "\t\tlog \"filename: \" & theFilename\n" +
+                "\ton error\n" +
+                "\t\tlog \"some error with:\" & theFilename\n" +
+                "\t\tset hasDocument to false\n" +
                 "\t\t\n" +
-                "\t\t-- check if this a true document\n" +
-                "\t\tset hasDocument to true\n" +
-                "\t\ttry\n" +
-                "\t\t\tset theFilename to name of theDocument\n" +
-                "\t\ton error\n" +
-                "\t\t\tset hasDocument to false\n" +
-                "\t\tend try\n" +
-                "\t\t\n" +
-                "\t\tif hasDocument then\n" +
-                "\t\t\tset exportFilename to export_folder & theFilename & \".\" & exportFileExtension\n" +
-                "\t\t\tlog \"Exporting \" & theFilename\n" +
-                "\t\t\tsave theDocument in exportFilename\n" +
-                "\t\tend if\n" +
-                "\t\t\n" +
-                "\tend repeat\n" +
-                "\t\n";
+                "\tend try\n" +
+                "\t\n" +
+                "\tlog export settings of theDocument\n" +
+                "\t--\tif hasDocument then\n" +
+                "\tset exportFilename to export_folder & \"/\" & theFilename & \".pdf\"\n" +
+                "\tlog \"Exporting \" & exportFilename\n" +
+                "\tsave theDocument in exportFilename\n" +
+                "\t--\tend if\n" +
+                "\t\n" +
+                "\t--\tend repeat\n";
         return export;
     }
 
