@@ -3,6 +3,6 @@
 {"id": "db", "name": "mysql", "text": "replica server"}
 ],
 "links": [
-{"src": "web", "target":"db"}
+{"s": "web", "t":"db"}
 ]}
 

@@ -1,24 +1,28 @@
 package com.wotifgroup.realconfu.core;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Link {
     private String source;
     private String target;
 
+    @JsonProperty("s")
     public String getSource() {
         return source;
     }
 
+    @JsonProperty("s")
     public void setSource(String source) {
         this.source = source;
     }
-
+    @JsonProperty("t")
     public String getTarget() {
         return target;
     }
 
+    @JsonProperty("t")
     public void setTarget(String target) {
         this.target = target;
     }

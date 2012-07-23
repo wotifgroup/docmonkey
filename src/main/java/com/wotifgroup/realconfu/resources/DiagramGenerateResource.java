@@ -23,10 +23,11 @@ public class DiagramGenerateResource {
 
     @GET
     public Response generate() {
-        //queue document generation
         return Response.ok().build();
     }
 
+//    export_formats
+//    publish_to
     @POST
     @Timed
     public Response generate(Graph graph) throws ScriptException {

@@ -1,4 +1,17 @@
 
+#realconfu:
+##  export formats
+#  export:
+#    formats: "png, pdf"
+#
+##  publish chain
+#  publish:
+#    http:
+#      url: "https://confluence.wotifgroup.com/Architecture/Diagrams"
+#  og:
+#    #Default Omnigraffle template. This can be easier to setup style changes directly from og templates.
+#    template: "template_1"
+
 # HTTP-specific options.
 http:
 
