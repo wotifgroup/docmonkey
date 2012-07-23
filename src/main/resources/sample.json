@@ -1,0 +1,8 @@
+{"nodes":[
+{"id": "web", "name": "web server", "text": "apache server"},
+{"id": "db", "name": "mysql", "text": "replica server"}
+],
+"links": [
+{"src": "web", "target":"db"}
+]}
+
