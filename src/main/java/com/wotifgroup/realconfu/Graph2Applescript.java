@@ -7,6 +7,7 @@ import com.wotifgroup.realconfu.core.Node;
 public class Graph2Applescript {
 
     public String execute(Graph graph) {
+
         StringBuffer sb = new StringBuffer();
 
         sb.append("tell application \"OmniGraffle Professional 5\"\n");
@@ -18,10 +19,13 @@ public class Graph2Applescript {
         sb.append(addLinks(graph));
 
         sb.append(autolayout());
-        sb.append("save myDocument in ((POSIX file of \"/Users/Brett/work/tmp/test\" as alias))\n");
+        sb.append("\tsave myDocument\n");
 //        sb.append(export_png());
         sb.append("end tell\n");
         sb.append("end tell\n");
+
+//        check with finder if the file exists, iterate till we find one.
+
         return sb.toString();
 
     }
@@ -88,6 +92,14 @@ public class Graph2Applescript {
     }
 
 
+    public String delete(String posix_filename) {
+        String remove_file = "tell application \"Finder\"\n" +
+                "\tif (exists (POSIX file \"" + posix_filename + "\" as text)) then\n" +
+                "\t\tdelete (POSIX file \"" + posix_filename + "\" as text)\n" +
+                "\tend if\n" +
+                "end tell\n";
+        return remove_file;
+    }
     public String export_png() {
         String export = "property exportFileExtension : \"png\"\n" +
                 "property ADD_CANVAS_NUMBER : true\n" +

@@ -23,7 +23,15 @@ public class DiagramGenerateResource {
 
     @GET
     public Response generate() {
+//        list generated files
         return Response.ok().build();
+    }
+
+    @DELETE
+    public Response delete(@QueryParam("name") String name ) throws ScriptException {
+        String applescript = new Graph2Applescript().delete(name);
+        new ScriptEngineManager().getEngineByName("AppleScript").eval(applescript);
+        return Response.ok(applescript).build();
     }
 
 //    export_formats
