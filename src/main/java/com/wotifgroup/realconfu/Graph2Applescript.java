@@ -60,6 +60,7 @@ public class Graph2Applescript {
     public String export_pdf(Graph graph) {
         String export = "property exportFileExtension : \"pdf\"\n" +
                 "\n" +
+                "tell application \"OmniGraffle Professional 5\"\n" +
                 "\t--\ttell canvas of front window\n" +
                 "\tset theDocument to front document\n" +
                 "\tset theWindow to front window\n" +
@@ -86,12 +87,13 @@ public class Graph2Applescript {
                 "\t\n" +
                 "\tlog export settings of theDocument\n" +
                 "\t--\tif hasDocument then\n" +
-                "\tset exportFilename to export_folder & \"/\" & theFilename & \".pdf\"\n" +
+                "\tset exportFilename to export_folder & \"/\" & theFilename & \".\" & exportFileExtension\n" +
                 "\tlog \"Exporting \" & exportFilename\n" +
                 "\tsave theDocument in exportFilename\n" +
                 "\t--\tend if\n" +
                 "\t\n" +
-                "\t--\tend repeat\n";
+                "\t--\tend repeat\n" +
+                "end tell";
         return export;
     }
 
