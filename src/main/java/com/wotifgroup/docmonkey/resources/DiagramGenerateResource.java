@@ -1,8 +1,9 @@
-package com.wotifgroup.DocMonkey.resources;
+package com.wotifgroup.docmonkey.resources;
 
-import com.wotifgroup.DocMonkey.Graph2Applescript;
-import com.wotifgroup.DocMonkey.DocMonkeyService;
-import com.wotifgroup.DocMonkey.core.Graph;
+
+import com.wotifgroup.docmonkey.DocMonkeyService;
+import com.wotifgroup.docmonkey.Graph2Applescript;
+import com.wotifgroup.docmonkey.core.Graph;
 import com.yammer.dropwizard.logging.Log;
 import com.yammer.metrics.annotation.Timed;
 import org.codehaus.jackson.map.ObjectMapper;

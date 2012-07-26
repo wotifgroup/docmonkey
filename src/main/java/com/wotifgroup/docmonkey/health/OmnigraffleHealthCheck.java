@@ -1,4 +1,4 @@
-package com.wotifgroup.DocMonkey.health;
+package com.wotifgroup.docmonkey.health;
 
 import com.yammer.metrics.core.HealthCheck;
 

@@ -1,9 +1,8 @@
 # Introduction
 
-The (Realities and concerns collide) application was developed to generate documentation. From a mix of automated and personal annotations to generate and public documentation.
+docmonkey makes diagrams from a tiny bit of your input, to let you get on with real work.
 
-The drop wizard example application was developed to, as its name implies, provide examples of some of the features
-present in drop wizard.
+This app is an Omnigraffle Firehose!!
 
 # Overview
 
@@ -12,12 +11,24 @@ present in drop wizard.
 - Run the Application (see below)
 - curl -XPOST -H"Content-type: application/json" localhost:8080/generate -d@src/main/resources/sample.json
 
-This will create a really simple diagram,
+This will create basic diagrams in the exports dir, without styles: in the following formats:
+- png
+- html referencing pngs
+- ascii art
+- pdf
+- svg
+
+*NOTE*: On first run, you are likely to get a warning about file saving.
+*NOTE*: No effort has been spent on supporting concurrent requests, queueing up jobs, ie. multi-user support for document generation.
 
 If it doesn't look like the picture, then check the default template configuration in Omnigraffle. The auto layout features of Omnigraffle are needed.
 
 Html pages with pngs are now accessible via: (TBD)
 
+
+* Acknowledgements
+- good old posts in omnigraffle forums: sunnysight 2009; Charles-Axel Dein and others.
+- from http://forums.omnigroup.com/showthread.php?t=106&highlight=export+posix
 
 # Running The Application
 
@@ -32,7 +43,6 @@ To try the example application run the following commands.
         java -jar target/dropwizard-DocMonkey-0.1.0-SNAPSHOT.jar server example.yml
 
 
-* Acknowledgements
-- good old posts in omnigraffle forums: sunnysight 2009; Charles-Axel Dein and others.
-- from http://forums.omnigroup.com/showthread.php?t=106&highlight=export+posix
-
+* Put the monkey to work
+- curl -XPOST -H"Content-type: application/json" localhost:8080/generate -d@src/main/resources/sample.json
+- curl localhost:8080/exports/index.html

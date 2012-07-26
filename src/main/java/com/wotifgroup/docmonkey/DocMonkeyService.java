@@ -1,8 +1,8 @@
-package com.wotifgroup.DocMonkey;
+package com.wotifgroup.docmonkey;
 
-import com.wotifgroup.DocMonkey.health.DiagramGeneratorHealthCheck;
-import com.wotifgroup.DocMonkey.health.OmnigraffleHealthCheck;
-import com.wotifgroup.DocMonkey.resources.DiagramGenerateResource;
+import com.wotifgroup.docmonkey.health.DiagramGeneratorHealthCheck;
+import com.wotifgroup.docmonkey.health.OmnigraffleHealthCheck;
+import com.wotifgroup.docmonkey.resources.DiagramGenerateResource;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.views.ViewBundle;

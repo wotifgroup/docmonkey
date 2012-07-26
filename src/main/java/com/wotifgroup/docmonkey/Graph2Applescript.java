@@ -1,8 +1,9 @@
-package com.wotifgroup.DocMonkey;
+package com.wotifgroup.docmonkey;
 
-import com.wotifgroup.DocMonkey.core.Graph;
-import com.wotifgroup.DocMonkey.core.Link;
-import com.wotifgroup.DocMonkey.core.Node;
+
+import com.wotifgroup.docmonkey.core.Graph;
+import com.wotifgroup.docmonkey.core.Link;
+import com.wotifgroup.docmonkey.core.Node;
 
 public class Graph2Applescript {
 

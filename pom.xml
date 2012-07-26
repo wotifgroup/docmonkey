@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wotifgroup</groupId>
-    <artifactId>DocMonkey</artifactId>
+    <artifactId>docmonkey</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>DocMonkey - Realities Collide with Concepts, generated</name>
+    <name>DocMonkey - Generating the documents we don't have time to update</name>
 
     <properties>
         <dropwizard.version>0.5.0-SNAPSHOT</dropwizard.version>
@@ -113,7 +113,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.wotifgroup.DocMonkey.DocMonkeyService</mainClass>
+                                    <mainClass>com.wotifgroup.docmonkey.DocMonkeyService</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

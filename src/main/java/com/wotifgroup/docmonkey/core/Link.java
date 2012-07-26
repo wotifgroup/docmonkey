@@ -1,4 +1,4 @@
-package com.wotifgroup.DocMonkey.core;
+package com.wotifgroup.docmonkey.core;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;

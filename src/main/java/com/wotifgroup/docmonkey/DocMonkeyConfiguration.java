@@ -1,4 +1,4 @@
-package com.wotifgroup.DocMonkey;
+package com.wotifgroup.docmonkey;
 
 import com.yammer.dropwizard.config.Configuration;
 
