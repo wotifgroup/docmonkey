@@ -47,8 +47,6 @@ public class DiagramGenerateResource {
         return Response.ok(applescript).build();
     }
 
-//    export_formats
-//    publish_to
     @POST
     @Timed
     public Response generate(Graph graph) throws ScriptException {

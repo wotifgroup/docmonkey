@@ -20,7 +20,7 @@ public class Graph2Applescript {
         StringBuffer sb = new StringBuffer();
 
         sb.append("tell application \"OmniGraffle Professional 5\"\n");
-        sb.append("	set theDocument to (make new document at end of documents with properties {name:\"test\", template: \"template_1\"})\n");
+        sb.append("	set theDocument to (make new document at end of documents with properties {template: \"template_1\"})\n");
         sb.append("  tell canvas of front window\n");
 
 
@@ -28,16 +28,16 @@ public class Graph2Applescript {
         sb.append(addLinks(graph));
 
         sb.append(autolayout());
-        sb.append("\tsave theDocument in \"" + config.getExportDir() + "\"\n");
+        sb.append("\tsave theDocument in \"" + config.getExportDir() + "/" + config.getDefaultName()+ ".graffle\"\n");
         sb.append("end tell\n");
         sb.append("end tell\n");
 
         sb.append("tell application \"OmniGraffle Professional 5\"\n");
-        sb.append(export_png(true));
+        sb.append(export_png());
         sb.append("close theDocument\n");
         sb.append("end tell\n");
 //        check with finder if the file exists, iterate till we find one.
-
+        LOG.debug(sb.toString());
         return sb.toString();
 
     }
@@ -155,13 +155,14 @@ public class Graph2Applescript {
         return export;
     }
 
-    public String export_png(Boolean add_canvas_number_suffix) {
+//                    "\t-- if the file's being actively edited, a random object may be selected when we come to \n" +
+//    "\t-- do the export, and with an object selected the export will default to 'selected graphics'  - oops!\n" +
+//            "\t-- sooo, override the 'default' (and return it later)\n" +
+
+    public String export_png() {
         String fileExtension = "png";
         String export = "set theDocument to front document\n\tset _path to path of theDocument\n" +
                 "\t\n" +
-                "\t-- if the file's being actively edited, a random object may be selected when we come to \n" +
-                "\t-- do the export, and with an object selected the export will default to 'selected graphics'  - oops!\n" +
-                "\t-- sooo, override the 'default' (and return it later)\n" +
                 "\tset oldAreaType to area type of current export settings\n" +
                 "\tset area type of current export settings to all graphics\n" +
                 "\t\n" +
@@ -169,14 +170,9 @@ public class Graph2Applescript {
                 "\tset draws background of current export settings to false\n" +
                 "\tset include border of current export settings to false\n" +
                 "\t\n" +
-                "\tset export_folder to (POSIX path of _path)\n" +
-                "\tlog \"export_folder: \" & export_folder\n" +
+                "\tset export_folder to \"" + config.getExportDir() + "\"\n" +
                 "\t\n" +
-                "\t--if folder_exists(export_folder) then\n" +
-                "\t--\tlog \"export_folder already exists: \" & export_folder\n" +
-                "\t--end if\n" +
-                "\t\n" +
-                "\tset theFilename to name of theDocument\n" +
+                "\tset theFilename to \"" + config.getDefaultName() + "\"\n" +
                 "\tset exportFilename to export_folder & \"/\" & theFilename & \".png\"\n" +
                 "\tlog \"export to \" & exportFilename\n" +
                 "\tset canvasCount to count of canvases of theDocument\n" +
@@ -188,8 +184,8 @@ public class Graph2Applescript {
                 "\t\tset layerCount to count of layers of theCanvas\n" +
                 "\t\t\n" +
                 "\t\tset canvasFilename to \"\"\n" +
-                "\t\tif " + add_canvas_number_suffix + " then\n" +
-                "\t\t\tset canvasFilename to canvasNumber & \"- \"\n" +
+                "\t\tif " + config.getCanvasNumberSuffix() + " then\n" +
+                "\t\t\tset canvasFilename to canvasNumber & \"_\"\n" +
                 "\t\tend if\n" +
                 "\t\tset canvasFilename to canvasFilename & canvas_name\n" +
                 "\t\t\n" +
@@ -215,7 +211,7 @@ public class Graph2Applescript {
                 "\t\t\t\n" +
                 "\t\t\tif (theLayer is prints) and (class of theLayer is not shared layer) then\n" +
                 "\t\t\t\tset layer_name to name of theLayer as string\n" +
-                "\t\t\t\tset filename to canvasFilename & \" - \" & layer_name & \"." + fileExtension + "\"\n" +
+                "\t\t\t\tset filename to canvasFilename & \"_\" & layer_name & \"." + fileExtension + "\"\n" +
                 "\t\t\t\tset exportFilename to export_folder & \"/\" & theFilename & filename\n" +
                 "\t\t\t\t--\t\t\t\tset exportFilename to export_folder & filename\n" +
                 "\t\t\t\tlog \"exportFilename: \" & exportFilename\n" +

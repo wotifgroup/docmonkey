@@ -1,6 +1,8 @@
 exportDir: /Users/Brett/work/tmp
-
+autoclose: true
+defaultName: test
 formats: png
+canvasNumberSuffix: false
 
 ##  publish chain
 #  publish:
@@ -139,7 +141,7 @@ logging:
   loggers:
 
     # Sets the level for 'com.example.app' to DEBUG.
-    com.wotifgroup.DocMonkey: DEBUG
+    com.wotifgroup.docmonkey: DEBUG
 
   # Settings for logging to stdout.
   console:

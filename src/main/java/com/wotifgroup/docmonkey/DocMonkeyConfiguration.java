@@ -5,14 +5,19 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class DocMonkeyConfiguration extends Configuration {
-    @JsonProperty
+
     @NotEmpty
     private String exportDir;
-
-    @JsonProperty
-    @NotEmpty
     private String formats;
 
+    @NotEmpty
+    private String autoclose;
+
+    @NotEmpty
+    private String defaultName;
+
+    @NotEmpty
+    private String canvasNumberSuffix;
 
     public String getExportDir() {
         return exportDir;
@@ -28,5 +33,29 @@ public class DocMonkeyConfiguration extends Configuration {
 
     public void setFormats(String formats) {
         this.formats = formats;
+    }
+
+    public String getAutoclose() {
+        return autoclose;
+    }
+
+    public void setAutoclose(String autoclose) {
+        this.autoclose = autoclose;
+    }
+
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    public void setDefaultName(String defaultName) {
+        this.defaultName = defaultName;
+    }
+
+    public String getCanvasNumberSuffix() {
+        return canvasNumberSuffix;
+    }
+
+    public void setCanvasNumberSuffix(String canvasNumberSuffix) {
+        this.canvasNumberSuffix = canvasNumberSuffix;
     }
 }
