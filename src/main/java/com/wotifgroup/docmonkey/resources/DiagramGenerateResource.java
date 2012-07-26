@@ -6,6 +6,7 @@ import com.wotifgroup.docmonkey.DocMonkeyService;
 import com.wotifgroup.docmonkey.Graph2Applescript;
 import com.wotifgroup.docmonkey.core.Graph;
 import com.yammer.dropwizard.logging.Log;
+import com.yammer.metrics.annotation.Metered;
 import com.yammer.metrics.annotation.Timed;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -20,8 +21,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.TEXT_PLAIN)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DiagramGenerateResource {
-    public static final ObjectMapper om = new ObjectMapper();
-    private static final Log LOG = Log.forClass(DocMonkeyService.class);
+    private static final Log LOG = Log.forClass(DiagramGenerateResource.class);
     private DocMonkeyConfiguration config;
 
 
@@ -36,19 +36,19 @@ public class DiagramGenerateResource {
 
     @GET
     public Response generate() {
-//        list generated files
         return Response.ok().build();
     }
 
     @DELETE
     public Response delete(@QueryParam("name") String name ) throws ScriptException {
         String applescript = new Graph2Applescript(config).delete(name);
-        new ScriptEngineManager().getEngineByName("AppleScript").eval(applescript);
+        Object result = new ScriptEngineManager().getEngineByName("AppleScript").eval(applescript);
+        LOG.debug(result.toString());
         return Response.ok(applescript).build();
     }
 
     @POST
-    @Timed
+    @Metered(name="generate")
     public Response generate(Graph graph) throws ScriptException {
         String applescript = new Graph2Applescript(config).execute(graph);
         LOG.debug("received: {}", applescript);

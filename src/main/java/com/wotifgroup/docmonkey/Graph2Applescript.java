@@ -52,7 +52,6 @@ public class Graph2Applescript {
         for (Node node : graph.getNodes()) {
             sb.append("		set myshape to make new shape at end of graphics with properties {autosizing:full, text: {text: \"" + node.getText () + "\", alignment: center}, draws shadow: false, tag:\"" + node.getId()  + "\"}\n");
         }
-
         return sb.toString();
     }
 
@@ -194,7 +193,6 @@ public class Graph2Applescript {
                 "\t\trepeat with layerNumber from 1 to layerCount\n" +
                 "\t\t\tset theLayer to layer layerNumber of theCanvas\n" +
                 "\t\t\tset number_of_layer_to_be_exported to 0\n" +
-                "\t\t\t\n" +
                 "\t\t\tif theLayer is prints and class of theLayer is not shared layer then\n" +
                 "\t\t\t\tset layer_name to name of theLayer as string\n" +
                 "\t\t\t\tif character 1 of layer_name is not \"*\" then\n" +
@@ -205,27 +203,28 @@ public class Graph2Applescript {
                 "\t\t\t\tend if\n" +
                 "\t\t\tend if\n" +
                 "\t\tend repeat\n" +
-                "\t\t\n" +
+                "\t\tset image_list to {}\n" +
                 "\t\trepeat with layerNumber from 1 to layerCount\n" +
                 "\t\t\tset theLayer to layer layerNumber of theCanvas\n" +
                 "\t\t\t\n" +
                 "\t\t\tif (theLayer is prints) and (class of theLayer is not shared layer) then\n" +
                 "\t\t\t\tset layer_name to name of theLayer as string\n" +
                 "\t\t\t\tset filename to canvasFilename & \"_\" & layer_name & \"." + fileExtension + "\"\n" +
-                "\t\t\t\tset exportFilename to export_folder & \"/\" & theFilename & filename\n" +
-                "\t\t\t\t--\t\t\t\tset exportFilename to export_folder & filename\n" +
+                "\t\t\t\tset exportFilename to export_folder & \"/\" & theFilename & \"_\" & filename\n" +
                 "\t\t\t\tlog \"exportFilename: \" & exportFilename\n" +
                 "\t\t\t\t\n" +
                 "\t\t\t\t-- show the layer, export, then hide the layer\n" +
                 "\t\t\t\tif character 1 of layer_name is not \"*\" then\n" +
                 "\t\t\t\t\tset visible of theLayer to true\n" +
                 "\t\t\t\t\tsave theDocument in exportFilename\n" +
+                "\t\t\t\t\tcopy exportFilename to the end of image_list\n" +
                 "\t\t\t\t\tset visible of theLayer to false\n" +
                 "\t\t\t\tend if\n" +
                 "\t\t\tend if\n" +
                 "\t\tend repeat\n" +
                 "\t\tset canvasNumber to canvasNumber + 1\n" +
                 "\tend repeat\n";
+//                "\tcopy \"\" to end of image_list\n";
         return export;
     }
 

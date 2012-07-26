@@ -27,8 +27,7 @@ public class DocMonkeyService extends Service<DocMonkeyConfiguration> {
         environment.addHealthCheck(new DiagramGeneratorHealthCheck());
         environment.addHealthCheck(new OmnigraffleHealthCheck());
         addBundle(new ViewBundle());
-        addBundle(new AssetsBundle());
-
+        addBundle(new AssetsBundle(configuration.getExportDir(), "/dm"));
     }
 
 
