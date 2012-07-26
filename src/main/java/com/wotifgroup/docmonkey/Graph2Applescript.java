@@ -4,8 +4,16 @@ package com.wotifgroup.docmonkey;
 import com.wotifgroup.docmonkey.core.Graph;
 import com.wotifgroup.docmonkey.core.Link;
 import com.wotifgroup.docmonkey.core.Node;
+import com.yammer.dropwizard.logging.Log;
 
 public class Graph2Applescript {
+    private static final Log LOG = Log.forClass(Graph2Applescript.class);
+    private DocMonkeyConfiguration config;
+
+    public Graph2Applescript(DocMonkeyConfiguration config) {
+        super();
+        this.config = config;
+    }
 
     public String execute(Graph graph) {
 
@@ -20,7 +28,7 @@ public class Graph2Applescript {
         sb.append(addLinks(graph));
 
         sb.append(autolayout());
-        sb.append("\tsave theDocument\n");
+        sb.append("\tsave theDocument in \"" + config.getExportDir() + "\"\n");
         sb.append("end tell\n");
         sb.append("end tell\n");
 
@@ -161,7 +169,7 @@ public class Graph2Applescript {
                 "\tset draws background of current export settings to false\n" +
                 "\tset include border of current export settings to false\n" +
                 "\t\n" +
-                "\tset export_folder to (POSIX path of \"/Users/Brett/work/tmp/export\")\n" +
+                "\tset export_folder to (POSIX path of _path)\n" +
                 "\tlog \"export_folder: \" & export_folder\n" +
                 "\t\n" +
                 "\t--if folder_exists(export_folder) then\n" +

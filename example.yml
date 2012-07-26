@@ -1,9 +1,7 @@
+exportDir: .
 
-#DocMonkey:
-##  export formats
-#  export:
-#    formats: "png, pdf"
-#
+formats: png
+
 ##  publish chain
 #  publish:
 #    http:

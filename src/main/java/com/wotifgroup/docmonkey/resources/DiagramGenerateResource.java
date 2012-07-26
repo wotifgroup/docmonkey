@@ -1,6 +1,7 @@
 package com.wotifgroup.docmonkey.resources;
 
 
+import com.wotifgroup.docmonkey.DocMonkeyConfiguration;
 import com.wotifgroup.docmonkey.DocMonkeyService;
 import com.wotifgroup.docmonkey.Graph2Applescript;
 import com.wotifgroup.docmonkey.core.Graph;
@@ -21,6 +22,17 @@ import javax.ws.rs.core.Response;
 public class DiagramGenerateResource {
     public static final ObjectMapper om = new ObjectMapper();
     private static final Log LOG = Log.forClass(DocMonkeyService.class);
+    private DocMonkeyConfiguration config;
+
+
+    public DiagramGenerateResource() {
+        super();
+    }
+
+    public DiagramGenerateResource(DocMonkeyConfiguration config) {
+        this();
+        this.config = config;
+    }
 
     @GET
     public Response generate() {
@@ -30,7 +42,7 @@ public class DiagramGenerateResource {
 
     @DELETE
     public Response delete(@QueryParam("name") String name ) throws ScriptException {
-        String applescript = new Graph2Applescript().delete(name);
+        String applescript = new Graph2Applescript(config).delete(name);
         new ScriptEngineManager().getEngineByName("AppleScript").eval(applescript);
         return Response.ok(applescript).build();
     }
@@ -40,7 +52,7 @@ public class DiagramGenerateResource {
     @POST
     @Timed
     public Response generate(Graph graph) throws ScriptException {
-        String applescript = new Graph2Applescript().execute(graph);
+        String applescript = new Graph2Applescript(config).execute(graph);
         LOG.debug("received: {}", applescript);
 
         new ScriptEngineManager().getEngineByName("AppleScript").eval(applescript);

@@ -6,8 +6,8 @@
     <groupId>com.wotifgroup</groupId>
     <artifactId>docmonkey</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>DocMonkey - Generating the documents we don't have time to update</name>
-
+    <name>docmonkey</name>
+    <description>Generating the documents we don't have time to update</description>
     <properties>
         <dropwizard.version>0.5.0-SNAPSHOT</dropwizard.version>
     </properties>

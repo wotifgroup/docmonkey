@@ -25,10 +25,11 @@ If it doesn't look like the picture, then check the default template configurati
 
 Html pages with pngs are now accessible via: (TBD)
 
-
 * Acknowledgements
 - good old posts in omnigraffle forums: sunnysight 2009; Charles-Axel Dein and others.
 - from http://forums.omnigroup.com/showthread.php?t=106&highlight=export+posix
+
+# Configure
 
 # Running The Application
 
