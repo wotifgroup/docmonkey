@@ -1,4 +1,4 @@
-package com.wotifgroup.realconfu.core;
+package com.wotifgroup.DocMonkey.core;
 
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;

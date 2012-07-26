@@ -1,4 +1,4 @@
-package com.wotifgroup.realconfu.health;
+package com.wotifgroup.DocMonkey.health;
 
 import com.yammer.metrics.core.HealthCheck;
 

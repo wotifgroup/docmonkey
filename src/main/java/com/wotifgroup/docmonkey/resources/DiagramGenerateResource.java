@@ -1,8 +1,8 @@
-package com.wotifgroup.realconfu.resources;
+package com.wotifgroup.DocMonkey.resources;
 
-import com.wotifgroup.realconfu.Graph2Applescript;
-import com.wotifgroup.realconfu.RealConfuService;
-import com.wotifgroup.realconfu.core.Graph;
+import com.wotifgroup.DocMonkey.Graph2Applescript;
+import com.wotifgroup.DocMonkey.DocMonkeyService;
+import com.wotifgroup.DocMonkey.core.Graph;
 import com.yammer.dropwizard.logging.Log;
 import com.yammer.metrics.annotation.Timed;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class DiagramGenerateResource {
     public static final ObjectMapper om = new ObjectMapper();
-    private static final Log LOG = Log.forClass(RealConfuService.class);
+    private static final Log LOG = Log.forClass(DocMonkeyService.class);
 
     @GET
     public Response generate() {

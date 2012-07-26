@@ -1,6 +1,6 @@
 # Introduction
 
-The Realconfu (Realities and concerns collide) application was developed to generate documentation. From a mix of automated and personal annotations to generate and public documentation.
+The (Realities and concerns collide) application was developed to generate documentation. From a mix of automated and personal annotations to generate and public documentation.
 
 The drop wizard example application was developed to, as its name implies, provide examples of some of the features
 present in drop wizard.
@@ -29,8 +29,10 @@ To try the example application run the following commands.
 
 * To run the server run.
 
-        java -jar target/dropwizard-realconfu-0.1.0-SNAPSHOT.jar server example.yml
+        java -jar target/dropwizard-DocMonkey-0.1.0-SNAPSHOT.jar server example.yml
 
 
 * Acknowledgements
-- good old posts in og forums: sunnysight 2009
+- good old posts in omnigraffle forums: sunnysight 2009; Charles-Axel Dein and others.
+- from http://forums.omnigroup.com/showthread.php?t=106&highlight=export+posix
+
