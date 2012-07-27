@@ -15,7 +15,7 @@ public class Graph2Applescript {
         this.config = config;
     }
 
-    public String execute(Graph graph) {
+    public String create(Graph graph) {
 
         StringBuffer sb = new StringBuffer();
 
@@ -31,15 +31,23 @@ public class Graph2Applescript {
         sb.append("\tsave theDocument in \"" + config.getExportDir() + "/" + config.getDefaultName()+ ".graffle\"\n");
         sb.append("end tell\n");
         sb.append("end tell\n");
+//        LOG.debug(sb.toString());
+        return sb.toString();
 
+    }
+
+    public String export(Graph graph) {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("on export(filelist)\n");
         sb.append("tell application \"OmniGraffle Professional 5\"\n");
         sb.append(export_png());
         sb.append("close theDocument\n");
         sb.append("end tell\n");
-//        check with finder if the file exists, iterate till we find one.
+        sb.append("return filelist\n");
+        sb.append("end export\n");
         LOG.debug(sb.toString());
         return sb.toString();
-
     }
 
     private String autolayout() {
@@ -203,7 +211,6 @@ public class Graph2Applescript {
                 "\t\t\t\tend if\n" +
                 "\t\t\tend if\n" +
                 "\t\tend repeat\n" +
-                "\t\tset image_list to {}\n" +
                 "\t\trepeat with layerNumber from 1 to layerCount\n" +
                 "\t\t\tset theLayer to layer layerNumber of theCanvas\n" +
                 "\t\t\t\n" +
@@ -217,14 +224,17 @@ public class Graph2Applescript {
                 "\t\t\t\tif character 1 of layer_name is not \"*\" then\n" +
                 "\t\t\t\t\tset visible of theLayer to true\n" +
                 "\t\t\t\t\tsave theDocument in exportFilename\n" +
-                "\t\t\t\t\tcopy exportFilename to the end of image_list\n" +
+                "\t\t\t\t\tif filelist is not \"\" then\n" +
+                "\t\t\t\t\tset filelist to filelist & \", \" & exportFilename\n" +
+                "\t\t\t\t\telse\n" +
+                "\t\t\t\t\tset filelist to filelist & exportFilename\n" +
+                "\t\t\t\t\tend if\n" +
                 "\t\t\t\t\tset visible of theLayer to false\n" +
                 "\t\t\t\tend if\n" +
                 "\t\t\tend if\n" +
                 "\t\tend repeat\n" +
                 "\t\tset canvasNumber to canvasNumber + 1\n" +
                 "\tend repeat\n";
-//                "\tcopy \"\" to end of image_list\n";
         return export;
     }
 
