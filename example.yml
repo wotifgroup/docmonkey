@@ -1,4 +1,8 @@
-exportDir: /Users/Brett/work/tmp
+
+#these are a pair for now, they must match, fix it later.
+exportDir: /Users/Brett/work/tmp/dm
+staticAssets: /dm/*
+
 autoclose: true
 defaultName: test
 formats: png
