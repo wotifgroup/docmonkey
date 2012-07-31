@@ -19,6 +19,9 @@ public class DocMonkeyConfiguration extends Configuration {
     @NotEmpty
     private String canvasNumberSuffix;
 
+    @NotEmpty
+    private String resourceLocation = "/dm";
+
     public String getExportDir() {
         return exportDir;
     }
@@ -57,5 +60,13 @@ public class DocMonkeyConfiguration extends Configuration {
 
     public void setCanvasNumberSuffix(String canvasNumberSuffix) {
         this.canvasNumberSuffix = canvasNumberSuffix;
+    }
+
+    public String getResourceLocation() {
+        return resourceLocation;
+    }
+
+    public void setResourceLocation(String resourceLocation) {
+        this.resourceLocation = resourceLocation;
     }
 }

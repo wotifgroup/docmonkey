@@ -45,5 +45,5 @@ To try the example application run the following commands.
 
 
 * Put the monkey to work
-- curl -XPOST -H"Content-type: application/json" localhost:8080/generate -d@src/main/resources/sample.json
+- curl -XPOST -H"Accept: text/html" -H"Content-type: application/json" localhost:8080/generate -d@src/main/resources/sample.json
 - curl localhost:8080/exports/index.html

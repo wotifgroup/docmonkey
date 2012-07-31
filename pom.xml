@@ -9,7 +9,7 @@
     <name>docmonkey</name>
     <description>Generating the documents we don't have time to update</description>
     <properties>
-        <dropwizard.version>0.5.0-SNAPSHOT</dropwizard.version>
+        <dropwizard.version>0.4.4</dropwizard.version>
     </properties>
     <repositories>
         <repository>

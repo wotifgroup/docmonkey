@@ -46,7 +46,7 @@ public class Graph2Applescript {
         sb.append("end tell\n");
         sb.append("return filelist\n");
         sb.append("end export\n");
-        LOG.debug(sb.toString());
+//        LOG.debug(sb.toString());
         return sb.toString();
     }
 
