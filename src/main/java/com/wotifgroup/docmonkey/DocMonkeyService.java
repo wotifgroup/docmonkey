@@ -8,6 +8,7 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.logging.Log;
 import com.yammer.dropwizard.views.ViewBundle;
 import com.yammer.dropwizard.views.ViewMessageBodyWriter;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 
 import javax.servlet.ServletException;
@@ -42,10 +43,11 @@ public class DocMonkeyService extends Service<DocMonkeyConfiguration> {
             public String getInitParameter(String name) {
                 if (name.equals("resourceBase")) {
                     LOG.debug("fetch resourceBase called");
-                    return configuration.getExportDir();
+                    return configuration.getExportDir() + "/..";
                 }
                 return super.getInitParameter(name);    //To change body of overridden methods use File | Settings | File Templates.
             }
+
 
             @Override
             protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,6 +55,7 @@ public class DocMonkeyService extends Service<DocMonkeyConfiguration> {
                 super.doGet(request, response);
             }
         };
+
         environment.addServlet(staticServlet, "/dm/*");
 
 //        lets add this last

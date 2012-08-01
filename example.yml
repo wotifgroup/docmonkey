@@ -1,7 +1,7 @@
 
 #these are a pair for now, they must match, fix it later.
 exportDir: /Users/Brett/work/tmp/dm
-staticAssets: /dm/*
+#setup: /dm/*
 
 autoclose: true
 defaultName: test
@@ -81,6 +81,8 @@ logging:
 
     # Sets the level for 'com.example.app' to DEBUG.
     com.wotifgroup.docmonkey: DEBUG
+
+    org.eclipse.jetty.servlet: DEBUG
 
   # Settings for logging to stdout.
   console:

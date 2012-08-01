@@ -46,7 +46,7 @@ public class DiagramGenerateResource {
 
     @POST
     @Metered(name="generate")
-    public ExportView generate(@QueryParam("name") String name, Graph graph) throws ScriptException {
+    public ExportView generate(@DefaultValue("test") @QueryParam("name") String name, Graph graph) throws ScriptException {
         String title = name;
         String applescript = new Graph2Applescript(config).create(graph);
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("AppleScript");

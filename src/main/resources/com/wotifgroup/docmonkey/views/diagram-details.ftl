@@ -5,7 +5,7 @@
 <h1>Hello, ${export.name?html}!</h1>
 <ul>
 <#list export.links as item>
-<li><img src="${export.uri}/${item?html}"/></li>
+<li><img src="${export.uri}${item?html}"/></li>
 </#list>
 </ul>
 </body>
