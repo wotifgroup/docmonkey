@@ -11,7 +11,7 @@ This app is an Omnigraffle Firehose!!
 - Run the Application (see below)
 - curl -XPOST -H"Content-type: application/json" localhost:8080/generate -d@src/main/resources/sample.json
 
-This will create basic diagrams in the exports dir, without styles: in the following formats:
+This will *eventually* create basic diagrams in the exports dir, without styles: in the following formats:
 - png
 - html referencing pngs
 - ascii art
