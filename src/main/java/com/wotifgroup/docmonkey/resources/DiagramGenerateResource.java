@@ -75,7 +75,7 @@ public class DiagramGenerateResource {
         retVal = engine.eval(export_script, ctx);
         LOG.debug("filelist:" + retVal.toString());
 
-        return new ExportView(new Export(name, title, config.getResourceLocation(), dir, (String)retVal));
+        return new ExportView(new Export(name, title, config.getResourceLocation(), config.getExportDir(), (String)retVal));
 
     }
 
