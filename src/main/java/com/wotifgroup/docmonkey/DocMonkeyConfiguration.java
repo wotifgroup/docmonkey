@@ -4,6 +4,8 @@ import com.yammer.dropwizard.config.Configuration;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Pattern;
+
 public class DocMonkeyConfiguration extends Configuration {
 
     @NotEmpty
@@ -20,6 +22,7 @@ public class DocMonkeyConfiguration extends Configuration {
     private String canvasNumberSuffix;
 
     @NotEmpty
+    @Pattern(regexp = "[^~]+")
     private String resourceLocation = "/dm";
 
     public String getExportDir() {

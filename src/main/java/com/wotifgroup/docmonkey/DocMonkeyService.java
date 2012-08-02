@@ -1,5 +1,6 @@
 package com.wotifgroup.docmonkey;
 
+import com.google.common.io.Files;
 import com.wotifgroup.docmonkey.health.DiagramGeneratorHealthCheck;
 import com.wotifgroup.docmonkey.health.OmnigraffleHealthCheck;
 import com.wotifgroup.docmonkey.resources.DiagramGenerateResource;
@@ -8,7 +9,6 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.logging.Log;
 import com.yammer.dropwizard.views.ViewBundle;
 import com.yammer.dropwizard.views.ViewMessageBodyWriter;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 
 import javax.servlet.ServletException;
@@ -37,35 +37,35 @@ public class DocMonkeyService extends Service<DocMonkeyConfiguration> {
         environment.addHealthCheck(new OmnigraffleHealthCheck());
         environment.addProvider(ViewMessageBodyWriter.class);
 
-        DefaultServlet staticServlet =  new DefaultServlet() {
+        FileStaticAssetServlet staticServlet = new FileStaticAssetServlet(configuration.getExportDir());
 
-            @Override
-            public String getInitParameter(String name) {
-                if (name.equals("resourceBase")) {
-                    LOG.debug("fetch resourceBase called");
-                    return configuration.getExportDir() + "/..";
-                }
-                return super.getInitParameter(name);    //To change body of overridden methods use File | Settings | File Templates.
-            }
-
-
-            @Override
-            protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                LOG.debug("got request:" + request.getRequestURI());
-                super.doGet(request, response);
-            }
-        };
-
-        environment.addServlet(staticServlet, "/dm/*");
-
-//        lets add this last
+        environment.addServlet(staticServlet, configuration.getResourceLocation() + "/*");
         environment.addResource(new DiagramGenerateResource(configuration));
 
-// !!       perhaps the jersey container might be capturing all!!
-
-// //        environment.addServlet(new AssetServlet(configuration.getExportDir(), CacheBuilderSpec.disableCaching(), configuration.getResourceLocation()), configuration.getResourceLocation() + '*');
     }
 
+class FileStaticAssetServlet extends DefaultServlet {
+    private final Log LOG = Log.forClass(FileStaticAssetServlet.class);
+    private String resourceBase;
+
+    public FileStaticAssetServlet(String resourceBase) {
+        this.resourceBase= Files.simplifyPath(resourceBase);
+    }
+
+    @Override
+    public String getInitParameter(String name) {
+        if (name.equals("resourceBase")) {
+            return resourceBase;
+        }
+        return super.getInitParameter(name);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOG.debug("got request:" + request.getRequestURI());
+        super.doGet(request, response);
+    }
+}
 
 }
 

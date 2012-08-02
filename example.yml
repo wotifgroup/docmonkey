@@ -1,7 +1,7 @@
 
 #these are a pair for now, they must match, fix it later.
-exportDir: /Users/Brett/work/tmp/dm
-#setup: /dm/*
+exportDir: /Users/Brett/Sites/docmonkey
+resourceLocation: /dm
 
 autoclose: true
 defaultName: test

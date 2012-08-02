@@ -1,6 +1,7 @@
 package com.wotifgroup.docmonkey.resources;
 
 
+import com.google.common.io.Files;
 import com.wotifgroup.docmonkey.DocMonkeyConfiguration;
 import com.wotifgroup.docmonkey.Graph2Applescript;
 import com.wotifgroup.docmonkey.core.Export;
@@ -13,6 +14,8 @@ import javax.script.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
+import java.io.IOException;
 
 @Path("/generate")
 @Produces(MediaType.TEXT_HTML)
@@ -39,32 +42,40 @@ public class DiagramGenerateResource {
 
     @DELETE
     public Response delete(@QueryParam("name") String name ) throws ScriptException {
-        String applescript = new Graph2Applescript(config).delete(name);
+        String dir = config.getExportDir() + "/" + name;
+        String filename = dir +  "/" + name;
+
+        String applescript = new Graph2Applescript(dir, filename).delete(name);
         new ScriptEngineManager().getEngineByName("AppleScript").eval(applescript);
         return Response.ok(applescript).build();
     }
 
     @POST
     @Metered(name="generate")
-    public ExportView generate(@DefaultValue("test") @QueryParam("name") String name, Graph graph) throws ScriptException {
+    public ExportView generate(@DefaultValue("test") @QueryParam("name") String name, Graph graph) throws ScriptException, IOException {
         String title = name;
-        String applescript = new Graph2Applescript(config).create(graph);
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("AppleScript");
+        String dir = config.getExportDir() + "/" + name;
+        String filename = dir +  "/" + name;
+
+        String applescript = new Graph2Applescript(dir, name).create(graph);
+
+        Files.createParentDirs(new File(filename));
 
         engine.eval(applescript);
-        applescript = new Graph2Applescript(config).export(graph);
+        String export_script = new Graph2Applescript(dir, name).export(graph);
 
-        String filelist = "";
+        String filelist = "";   //used in Applescript
         ScriptContext ctx = engine.getContext();
         Bindings bindings = ctx.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("javax_script_function", "export");
         bindings.put(ScriptEngine.ARGV, filelist);
 
         Object retVal = "";
-        retVal = engine.eval(applescript, ctx);
+        retVal = engine.eval(export_script, ctx);
         LOG.debug("filelist:" + retVal.toString());
 
-        return new ExportView(new Export(name, title, config.getResourceLocation(), config.getExportDir(), (String)retVal));
+        return new ExportView(new Export(name, title, config.getResourceLocation(), dir, (String)retVal));
 
     }
 

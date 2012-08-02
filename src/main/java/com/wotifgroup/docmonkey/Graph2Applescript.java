@@ -8,11 +8,16 @@ import com.yammer.dropwizard.logging.Log;
 
 public class Graph2Applescript {
     private static final Log LOG = Log.forClass(Graph2Applescript.class);
-    private DocMonkeyConfiguration config;
+    private String exportDir;
+    private String absFileName;
+    private String fileName;
+    private String canvasNumberSuffix;
 
-    public Graph2Applescript(DocMonkeyConfiguration config) {
-        super();
-        this.config = config;
+    public Graph2Applescript(String exportDir, String fileName) {
+        this.absFileName = exportDir + "/" + fileName;
+        this.fileName = fileName;
+        this.exportDir = exportDir;
+        this.canvasNumberSuffix = "true";
     }
 
     public String create(Graph graph) {
@@ -28,7 +33,7 @@ public class Graph2Applescript {
         sb.append(addLinks(graph));
 
         sb.append(autolayout());
-        sb.append("\tsave theDocument in \"" + config.getExportDir() + "/" + config.getDefaultName()+ ".graffle\"\n");
+        sb.append("\tsave theDocument in \"" + absFileName + ".graffle\"\n");
         sb.append("end tell\n");
         sb.append("end tell\n");
 //        LOG.debug(sb.toString());
@@ -177,9 +182,9 @@ public class Graph2Applescript {
                 "\tset draws background of current export settings to false\n" +
                 "\tset include border of current export settings to false\n" +
                 "\t\n" +
-                "\tset export_folder to \"" + config.getExportDir() + "\"\n" +
+                "\tset export_folder to \"" + exportDir + "\"\n" +
                 "\t\n" +
-                "\tset theFilename to \"" + config.getDefaultName() + "\"\n" +
+                "\tset theFilename to \"" + fileName + "\"\n" +
                 "\tset exportFilename to export_folder & \"/\" & theFilename & \".png\"\n" +
                 "\tlog \"export to \" & exportFilename\n" +
                 "\tset canvasCount to count of canvases of theDocument\n" +
@@ -191,7 +196,7 @@ public class Graph2Applescript {
                 "\t\tset layerCount to count of layers of theCanvas\n" +
                 "\t\t\n" +
                 "\t\tset canvasFilename to \"\"\n" +
-                "\t\tif " + config.getCanvasNumberSuffix() + " then\n" +
+                "\t\tif " + canvasNumberSuffix  + " then\n" +
                 "\t\t\tset canvasFilename to canvasNumber & \"_\"\n" +
                 "\t\tend if\n" +
                 "\t\tset canvasFilename to canvasFilename & canvas_name\n" +
