@@ -1,5 +1,4 @@
 
-#these are a pair for now, they must match, fix it later.
 exportDir: /Users/Brett/Sites/docmonkey
 resourceLocation: /dm
 
@@ -80,9 +79,9 @@ logging:
   loggers:
 
     # Sets the level for 'com.example.app' to DEBUG.
-    com.wotifgroup.docmonkey: DEBUG
+#    com.wotifgroup.docmonkey: DEBUG
 
-    org.eclipse.jetty.servlet: DEBUG
+#    org.eclipse.jetty.servlet: DEBUG
 
   # Settings for logging to stdout.
   console:
