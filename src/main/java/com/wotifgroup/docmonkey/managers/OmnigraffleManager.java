@@ -1,4 +1,4 @@
-package com.wotifgroup.DocMonkey.managers;
+package com.wotifgroup.docmonkey.managers;
 
 import com.yammer.dropwizard.lifecycle.Managed;
 

@@ -31,6 +31,9 @@ Html pages with pngs are now accessible via: (TBD)
 
 # Configure
 
+edit example.yml
+add your export directory. On a mac, exporting to your local Sites directory might be useful, just make it the full path.
+
 # Running The Application
 
 To try the example application run the following commands.
@@ -41,7 +44,7 @@ To try the example application run the following commands.
 
 * To run the server run.
 
-        java -jar target/dropwizard-DocMonkey-0.1.0-SNAPSHOT.jar server example.yml
+        java -jar target/dropwizard-docmonkey-0.1.0-SNAPSHOT.jar server example.yml
 
 
 * Put the monkey to work
