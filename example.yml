@@ -78,8 +78,7 @@ logging:
   # Logger-specific levels.
   loggers:
 
-    # Sets the level for 'com.example.app' to DEBUG.
-#    com.wotifgroup.docmonkey: DEBUG
+    com.wotifgroup.docmonkey: INFO
 
 #    org.eclipse.jetty.servlet: DEBUG
 

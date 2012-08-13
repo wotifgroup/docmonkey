@@ -1,16 +1,17 @@
 package com.wotifgroup.docmonkey.core;
 
+import org.codehaus.jackson.annotate.JsonAnySetter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Node {
     private String id;
     private String name;
     private String text;
-
-    public String getId() {
-        return id;
-    }
+    private Map<String, Object> all = new HashMap<String, Object>();
 
     public void setId(String id) {
         this.id = id;
@@ -54,4 +55,21 @@ public class Node {
         result = 31 * result + (text != null ? text.hashCode() : 0);
         return result;
     }
+
+    @JsonAnySetter
+    public void set(String name, Object value) {
+        all.put(name, value);
+    }
+
+    public Map<String, Object> getAll() {
+        return all;
+    }
+
+    public void setAll(Map<String, Object> all) {
+        this.all = all;
+    }
+    public String getId() {
+        return id;
+    }
 }
+

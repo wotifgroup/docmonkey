@@ -8,21 +8,21 @@ public class Link {
     private String source;
     private String target;
 
-    @JsonProperty("s")
+    @JsonProperty("source")
     public String getSource() {
         return source;
     }
 
-    @JsonProperty("s")
+    @JsonProperty("source")
     public void setSource(String source) {
         this.source = source;
     }
-    @JsonProperty("t")
+    @JsonProperty("target")
     public String getTarget() {
         return target;
     }
 
-    @JsonProperty("t")
+    @JsonProperty("target")
     public void setTarget(String target) {
         this.target = target;
     }
